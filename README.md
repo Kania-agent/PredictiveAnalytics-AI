@@ -1,95 +1,160 @@
-# 🔮 PredictiveAnalytics-AI
+# PredictiveAnalytics-AI
 
-> AI-powered forecasting platform with time series analysis, confidence intervals, and interactive prediction dashboards — powered by MiMo V2.5
+![PredictiveAnalytics-AI banner](assets/banner.png)
 
-## Why This Exists
+> **Powered by MiMo** — built on top of Xiaomi's [MiMo](https://platform.xiaomimimo.com) reasoning models for intelligent time-series analysis and forecasting.
 
-Businesses make decisions today based on what they think will happen tomorrow. Yet most analytics tools stop at describing what already happened — dashboards full of historical charts that answer "what was" but never "what will be." The leap from descriptive to predictive analytics typically requires data science expertise, custom ML pipelines, and infrastructure that most teams can't afford to build or maintain.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Powered by MiMo](https://img.shields.io/badge/Powered%20by-MiMo-ff6b35.svg)](https://platform.xiaomimimo.com)
 
-PredictiveAnalytics-AI collapses that gap. It combines time series analysis with MiMo V2.5's reasoning engine to deliver forecasts that come with something most prediction tools lack: *explainability*. Each prediction includes confidence intervals, contributing factors, seasonal decomposition, and risk assessments so decision-makers understand not just the forecast, but why the model believes it and how much to trust it.
+---
 
-From revenue forecasting and demand planning to capacity prediction and trend analysis, this platform puts production-grade forecasting into the hands of analysts, product managers, and engineers — no PhD in statistics required. The model adapts to your data's patterns, respects seasonality and trend breaks, and communicates uncertainty honestly.
+## Why MiMo
 
-## Architecture
+Time-series forecasting is traditionally dominated by statistical models — ARIMA, Prophet, Exponential Smoothing — that excel at extrapolating patterns but struggle with contextual understanding. When a retail chain asks "what will sales look like next quarter?", the answer depends on promotions, competitor actions, economic indicators, and seasonality that no single statistical model can reason about holistically. MiMo V2.5 can synthesize structured time-series data with unstructured context to produce forecasts that account for the full picture.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                  PredictiveAnalytics-AI Pipeline                │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐      │
-│  │              │    │   Feature    │    │              │      │
-│  │  Time Series │───▶│ Engineering  │───▶│    Model     │      │
-│  │   Ingest     │    │   Layer      │    │   Training   │      │
-│  │              │    │              │    │              │      │
-│  └──────────────┘    └──────────────┘    └──────┬───────┘      │
-│                                                 │              │
-│                                                 ▼              │
-│                  ┌──────────────┐    ┌──────────────┐          │
-│                  │              │    │              │          │
-│                  │  Prediction  │───▶│ Visualization│          │
-│                  │   Engine     │    │  Dashboard   │          │
-│                  │              │    │              │          │
-│                  └──────────────┘    └──────────────┘          │
-│                                                                 │
-│  Input: Historical time series data                             │
-│  Output: Forecasts + Confidence intervals + Trend charts        │
-└─────────────────────────────────────────────────────────────────┘
-```
+MiMo's reasoning capabilities are particularly powerful for anomaly contextualization in forecasting. When historical data contains outliers — a pandemic, a supply chain disruption, a one-time event — traditional models either overfit to them or arbitrarily exclude them. MiMo reasons about *why* the anomaly occurred and decides intelligently whether to include, exclude, or adjust for it in the forecast. This eliminates the most common source of forecast error in real-world datasets.
 
-## Token Consumption Model
+The model also excels at ensemble reasoning. Rather than blindly averaging multiple forecast methods, MiMo evaluates which approach is most appropriate for each time series based on its characteristics — trend strength, seasonality type, noise level, and data frequency. It can explain its selection, giving analysts confidence in the methodology rather than treating forecasting as a black box.
 
-| Pipeline Stage         | Tokens per Run | Description                                          |
-|------------------------|----------------|------------------------------------------------------|
-| ⚙️ Feature Engineering  | 200K           | Decompose trends, seasonality, noise, and lags       |
-| 🧠 Model Training      | 500K           | Fit forecasting models, cross-validate, tune params  |
-| 📈 Visualization       | 100K           | Render charts, confidence bands, and metric cards    |
-| **Total**              | **800K**       | End-to-end forecasting pipeline                      |
+---
+
+## Token Consumption
+
+| Agent | Model | Tokens/run | Frequency | Daily/user |
+|---|---|---|---|---|
+| Series Analyzer | MiMo V2.5 | 3,800 | Per dataset | ~19,000 |
+| Forecast Generator | MiMo V2.5 | 4,200 | Per forecast | ~21,000 |
+| Context Integrator | MiMo V2.5 | 2,500 | Per forecast | ~12,500 |
+
+---
+
+## What it does
+
+PredictiveAnalytics-AI ingests time-series data from databases, CSVs, APIs, and data warehouses, applies MiMo-powered analysis to understand the data's characteristics, selects the optimal forecasting methodology, and generates predictions with confidence intervals. It supports univariate and multivariate forecasting, anomaly detection, and what-if scenario analysis.
+
+---
+
+## Why this exists
+
+Business teams need accurate forecasts for inventory, staffing, revenue planning, and capacity management — but most forecasting tools require deep statistical expertise to configure correctly. The wrong model choice, inappropriate hyperparameters, or mishandled outliers can make predictions worse than a naive baseline. PredictiveAnalytics-AI democratizes high-quality forecasting by letting MiMo reason about the best approach for each specific dataset.
+
+---
 
 ## Features
 
-- **Trend Line Visualization** — Pure CSS trend charts with historical data and predicted trajectories
-- **Confidence Intervals** — Every prediction comes with 80% and 95% confidence bands
-- **Prediction Cards** — Forecasts with risk assessment, contributing factors, and accuracy scores
-- **Model Performance Metrics** — MAE, RMSE, R², and MAPE tracked across all predictions
-- **Seasonal Decomposition** — Automatic detection and visualization of seasonal patterns
-- **Multi-Period Forecasting** — Predict daily, weekly, monthly, or quarterly horizons
-- **Trend Break Detection** — Identifies structural changes in your data and adapts models accordingly
-- **Data Science Theme** — Professional visualization-focused dark interface
+- **Automatic model selection** — MiMo chooses the best forecasting method per time series
+- **Contextual forecasting** — incorporates external factors (promotions, events, weather)
+- **Anomaly-aware training** — intelligently handles outliers in historical data
+- **Multi-horizon predictions** — short-term, medium-term, and long-term forecasts
+- **Confidence intervals** — probabilistic forecasts with adjustable confidence levels
+- **What-if analysis** — model the impact of hypothetical changes
+- **Batch forecasting** — process thousands of time series in parallel
+- **REST API** — integrate forecasts into any application
+- **Drift detection** — monitors when data patterns shift and models need retraining
+- **Explainable forecasts** — MiMo explains why it chose each model and methodology
+
+---
 
 ## Tech Stack
 
-- **Frontend** — Vanilla HTML5 / CSS3 / JavaScript (ES6+)
-- **Styling** — Custom data-science theme with CSS chart rendering and gradient visualizations
-- **Logic** — Client-side time series processing, statistical calculations, and forecast generation
-- **AI Engine** — MiMo V2.5 by Nous Research
-- **Deployment** — Static files, works in any modern browser
+- **Python 3.11+** — core runtime
+- **MiMo V2.5** — time-series reasoning and model selection via Xiaomi API
+- **pandas** — data manipulation
+- **statsmodels** — statistical forecasting models
+- **scikit-learn** — machine learning utilities
+- **FastAPI** — REST API
+- **PostgreSQL + TimescaleDB** — time-series storage
+- **Plotly** — interactive forecast visualizations
+- **Celery** — batch processing
+- **Docker** — deployment
 
-## Quick Start
+---
+
+## Quickstart
 
 ```bash
-# Clone the repository
-git clone https://github.com/nousresearch/PredictiveAnalytics-AI.git
+# Clone and install
+git clone https://github.com/yuroo-shield/PredictiveAnalytics-AI.git
 cd PredictiveAnalytics-AI
+pip install -e ".[dev]"
 
-# Open directly
-open index.html
+# Set your MiMo API key
+export MIMO_API_KEY="your-key-here"
 
-# Or serve locally
-python3 -m http.server 8080
-# Navigate to http://localhost:8080
+# Forecast from a CSV
+predictive forecast \
+  --input sales_data.csv \
+  --column revenue \
+  --date-column date \
+  --horizon 90d \
+  --confidence 0.95
+
+# Forecast from a database
+predictive forecast \
+  --db-url "postgresql://user:pass@localhost/metrics" \
+  --query "SELECT date, value FROM metrics WHERE sensor_id=42" \
+  --horizon 30d \
+  --context "Expected 20% demand increase due to holiday season"
+
+# Start the API server
+predictive serve --port 8080
+
+# Run a what-if analysis
+predictive whatif \
+  --base-forecast forecast.json \
+  --scenario '{"promotion_spend": 1.5, "season": "holiday"}'
 ```
+
+---
 
 ## Project Structure
 
 ```
 PredictiveAnalytics-AI/
-├── index.html          # Dashboard layout with charts & prediction cards
-├── style.css           # Data science theme with CSS chart styles
-├── app.js              # Time series engine, forecasting logic, & visualizations
-└── README.md           # This file
+├── assets/
+│   └── banner.png
+├── predictive/
+│   ├── __init__.py
+│   ├── analyzer.py        # Time-series characteristic analysis
+│   ├── selector.py        # MiMo-powered model selection
+│   ├── forecaster.py      # Forecast generation engine
+│   ├── anomaly.py         # Anomaly detection and handling
+│   ├── context.py         # External context integration
+│   ├── drift.py           # Data drift detection
+│   ├── evaluator.py       # Forecast accuracy evaluation
+│   ├── api.py             # FastAPI REST endpoints
+│   └── config.py          # Configuration management
+├── models/
+│   ├── statistical.py     # ARIMA, ETS, Prophet wrappers
+│   ├── ml.py              # ML-based forecasting models
+│   └── ensemble.py        # Ensemble model management
+├── tests/
+│   ├── test_forecaster.py
+│   ├── test_selector.py
+│   ├── test_drift.py
+│   └── conftest.py
+├── docker-compose.yml
+├── pyproject.toml
+└── README.md
 ```
 
 ---
 
-> Built with MiMo V2.5 — [Nous Research](https://nousresearch.com)
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Run the test suite before submitting PRs:
+
+```bash
+# Run tests
+pytest tests/ -v
+
+# Run with coverage
+pytest tests/ --cov=predictive --cov-report=html
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
