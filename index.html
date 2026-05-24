@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredictiveAnalytics-AI — Forecasting Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <span class="logo-icon">◈</span>
+            <h1>PredictiveAnalytics<span class="ai-tag">AI</span></h1>
+        </div>
+        <div class="model-selector">
+            <select id="metric-select" class="select-input">
+                <option value="revenue">Revenue ($K)</option>
+                <option value="users">Active Users</option>
+                <option value="orders">Order Volume</option>
+            </select>
+            <select id="period-select" class="select-input">
+                <option value="30">Last 30 Days</option>
+                <option value="90">Last 90 Days</option>
+                <option value="180">Last 180 Days</option>
+            </select>
+        </div>
+        <div class="model-badge">
+            <span class="model-dot"></span> Model v3.2 Active
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <!-- KPI Row -->
+        <div class="kpi-row" id="kpi-row"></div>
+
+        <!-- Main Chart Area -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <h2>Trend & Forecast</h2>
+                <div class="chart-legend">
+                    <span class="legend-item"><span class="legend-dot historical"></span> Historical</span>
+                    <span class="legend-item"><span class="legend-dot predicted"></span> Predicted</span>
+                    <span class="legend-item"><span class="legend-dot confidence"></span> Confidence Band</span>
+                </div>
+            </div>
+            <div class="chart-container" id="chart-container">
+                <div class="chart-y-axis" id="y-axis"></div>
+                <div class="chart-area" id="chart-area">
+                    <div class="chart-grid" id="chart-grid"></div>
+                    <div class="chart-bars" id="chart-bars"></div>
+                    <div class="chart-line" id="chart-line"></div>
+                    <div class="chart-line predicted-line" id="predicted-line"></div>
+                    <div class="chart-confidence" id="chart-confidence"></div>
+                    <div class="chart-divider" id="chart-divider"></div>
+                </div>
+                <div class="chart-x-axis" id="x-axis"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Grid -->
+        <div class="bottom-grid">
+            <!-- Prediction Cards -->
+            <section class="predictions-section">
+                <h3 class="section-heading">Upcoming Predictions</h3>
+                <div class="predictions-grid" id="predictions-grid"></div>
+            </section>
+
+            <!-- Model Accuracy -->
+            <section class="accuracy-section">
+                <h3 class="section-heading">Model Accuracy Metrics</h3>
+                <div class="metrics-grid" id="metrics-grid"></div>
+                <div class="model-info">
+                    <h4>Model Configuration</h4>
+                    <div class="config-list" id="config-list"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
